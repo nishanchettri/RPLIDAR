@@ -7,14 +7,6 @@
 RPLidar lidar;
 
 // Change the pin mapping based on your needs.
-
-
-
-
-#define STATE_STANDBY 0
-#define STATE_FAR 1
-#define STATE_NEAR 2
-int state = STATE_STANDBY;
 /////////////////////////////////////////////////////////////////////////////
 #define LED_ENABLE  12 // The GPIO pin for the RGB led's common lead. 
                        // assumes a common positive type LED is used
@@ -133,34 +125,41 @@ void loop() {
     Serial.println(distance);
     Serial.print("angle->");
     Serial.println(angle);
+    //Serial.println("startBit");
+    //Serial.println(startBit);
+    //Serial.println("quality");
+    //Serial.println(quality);
+    
+    if (lidar.getCurrentPoint().startBit) {
+      // a new scan, display the previous data...
+      //digitalWrite(LED_ENABLE, LOW);
 
-      switch(state)
-      {
-        case STATE_STANDBY:
-         if (distance>3000)
-         {
-          state=STATE_FAR;  
-         }
-         if(distance<3000)
-         {
-          state=STATE_NEAR;
-         }
-         break;
+      
+      
+     /* if(angle >= 200)
+       {
+          //Serial.println("Angle between -30 AND 30");
+          //digitalWrite(LED_ENABLE, LOW);
+          setColor(0, 255, 255);
+       }
 
-         case STATE_FAR:
-         rgbEnable();
-         setColor(255,255,255);
-         state=STATE_STANDBY;
-         break;
-
-         case STATE_NEAR:
-         rgbDisable();
-         state=STATE_STANDBY;
-         break;
-        
-      }
-}
-  else {
+       if( (angle >= 0) && (angle <= 199))
+       {
+          //Serial.println("ANGLE between 90 and 180");
+          digitalWrite(LED_ENABLE, HIGH);          
+          setColor(255, 0, 255);
+        }
+       */
+       //displayColor(angleAtMinDist, minDistance);
+       minDistance = 100000;
+       angleAtMinDist = 0;
+    } else {
+       if ( distance > 0 &&  distance < minDistance) {
+          minDistance = distance;
+          angleAtMinDist = angle;
+       }
+    }
+  } else {
     analogWrite(RPLIDAR_MOTOR, 0); //stop the rplidar motor
     Serial.println("LOOSE CONNECTION WITH LIDAR");
     
@@ -174,7 +173,20 @@ void loop() {
        delay(1000);
     }
   }
+  if (distance >2000 )
+      {
+          rgbEnable();         
+          setColor(0, 255, 255);
+        
+      }
+      else
+      {
+        rgbDisable();
+         setColor(255, 255, 255);
+        
+      }
 }
+
 void rgbEnable()
 {
   digitalWrite(LED_ENABLE, HIGH);
