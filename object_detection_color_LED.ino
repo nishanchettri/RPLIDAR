@@ -133,14 +133,6 @@ void loop() {
     Serial.println(distance);
     Serial.print("angle->");
     Serial.println(angle);
-    //Serial.println("startBit");
-    //Serial.println(startBit);
-    //Serial.println("quality");
-    //Serial.println(quality);
-    
-//    if (lidar.getCurrentPoint().startBit) {
-//      // a new scan, display the previous data...
-//      //digitalWrite(LED_ENABLE, LOW);
 
       switch(state)
       {
@@ -167,45 +159,6 @@ void loop() {
          break;
         
       }
-
-      
-     /* if(angle >= 200)
-       {
-          //Serial.println("Angle between -30 AND 30");
-          //digitalWrite(LED_ENABLE, LOW);
-          setColor(0, 255, 255);
-       }
-
-       if( (angle >= 0) && (angle <= 199))
-       {
-          //Serial.println("ANGLE between 90 and 180");
-          digitalWrite(LED_ENABLE, HIGH);          
-          setColor(255, 0, 255);
-        }
-       */
-       //displayColor(angleAtMinDist, minDistance);
-//       minDistance = 100000;
-//       angleAtMinDist = 0;
-//    } else {
-//       if ( distance > 0 &&  distance < minDistance) {
-//          minDistance = distance;
-//          angleAtMinDist = angle;
-//       }
-//    }
-//  } else {
-//    analogWrite(RPLIDAR_MOTOR, 0); //stop the rplidar motor
-//    Serial.println("LOOSE CONNECTION WITH LIDAR");
-//    
-//    // try to detect RPLIDAR... 
-//    rplidar_response_device_info_t info;
-//    if (IS_OK(lidar.getDeviceInfo(info, 100))) {
-//       //detected...
-//       Serial.println("LIDAR DETECTED..");
-//       lidar.startScan();
-//       analogWrite(RPLIDAR_MOTOR, 255);
-//       delay(1000);
-//    }
-//  }
 }
 }
 void rgbEnable()
