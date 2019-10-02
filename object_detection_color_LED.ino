@@ -14,6 +14,7 @@ RPLidar lidar;
 #define LED_G       11 // The PWM pin for drive the Green LED
 #define LED_B       10 // The PWM pin for drive the Blue LED
     float distance ;
+    float distance1 ;
     float angle ;
     bool  startBit
     byte  quality;
@@ -177,7 +178,8 @@ void loop() {
        delay(1000);
     }
   }
-  if (distance >2000 )
+ distance1=map(distance,150,6000,0,100)
+  if (distance1 >33 )
       {
           rgbEnable();         
           setColor(0, 255, 255);
