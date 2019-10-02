@@ -178,8 +178,8 @@ void loop() {
        delay(1000);
     }
   }
- distance1=map(distance,150,6000,0,100)
-  if (distance1 >33 )
+ distance1=map(distance,150,6000,0,1000000)
+  if (distance1 >333333 )
       {
           rgbEnable();         
           setColor(0, 255, 255);
