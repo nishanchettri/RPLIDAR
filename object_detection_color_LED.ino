@@ -13,6 +13,10 @@ RPLidar lidar;
 #define LED_R       9  // The PWM pin for drive the Red LED
 #define LED_G       11 // The PWM pin for drive the Green LED
 #define LED_B       10 // The PWM pin for drive the Blue LED
+    float distance ;
+    float angle ;
+    bool  startBit
+    byte  quality;
 
 #define RPLIDAR_MOTOR 3 // The PWM pin for control the speed of RPLIDAR's motor.
                         // This pin should connected with the RPLIDAR's MOTOCTRL signal
@@ -116,10 +120,10 @@ void loop() {
   if (IS_OK(lidar.waitPoint())) {
     //perform data processing here... 
     
-    float distance = lidar.getCurrentPoint().distance;
-    float angle = lidar.getCurrentPoint().angle;
-    bool  startBit = lidar.getCurrentPoint().startBit; //whether this point is belong to a new scan
-    byte  quality  = lidar.getCurrentPoint().quality; //quality of the current measurement
+     distance = lidar.getCurrentPoint().distance;
+     angle = lidar.getCurrentPoint().angle;
+      startBit = lidar.getCurrentPoint().startBit; //whether this point is belong to a new scan
+      quality  = lidar.getCurrentPoint().quality; //quality of the current measurement
     
     Serial.print("distance->" );
     Serial.println(distance);
