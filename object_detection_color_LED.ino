@@ -160,6 +160,20 @@ void loop() {
         
       }
 }
+  else {
+    analogWrite(RPLIDAR_MOTOR, 0); //stop the rplidar motor
+    Serial.println("LOOSE CONNECTION WITH LIDAR");
+    
+    // try to detect RPLIDAR... 
+    rplidar_response_device_info_t info;
+    if (IS_OK(lidar.getDeviceInfo(info, 100))) {
+       //detected...
+       Serial.println("LIDAR DETECTED..");
+       lidar.startScan();
+       analogWrite(RPLIDAR_MOTOR, 255);
+       delay(1000);
+    }
+  }
 }
 void rgbEnable()
 {
